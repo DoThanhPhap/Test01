@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="vi">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>Trang HTML Đơn Giản</title>
+	<style>
+		body { font-family: Arial, Helvetica, sans-serif; margin: 2rem; color: #333; line-height: 1.5; }
+		header { margin-bottom: 1rem; }
+		button { padding: 0.5rem 1rem; font-size: 1rem; cursor: pointer; }
+		#message { margin-top: 1rem; color: #006600; font-weight: 600; }
+		footer { margin-top: 2rem; font-size: 0.9rem; color: #666; }
+	</style>
+</head>
+<body>
+	<header>
+		<h1>Chào mừng!</h1>
+		<p>Đây là một trang HTML rất đơn giản.</p>
+	</header>
+
+	<main>
+		<section>
+			<h2>Ví dụ tương tác</h2>
+			<p id="status">Nhấn nút bên dưới để hiển thị thời gian hiện tại.</p>
+			<button id="showTimeBtn">Hiển thị thời gian</button>
+			<p id="message" aria-live="polite"></p>
+		</section>
+	</main>
+
+	<script>
+		document.getElementById('showTimeBtn').addEventListener('click', function () {
+			const now = new Date();
+			document.getElementById('message').textContent = 'Bây giờ là: ' + now.toLocaleString();
+		});
+	</script>
+
+	<footer>
+		<p>File: index_test01.html — Tạo bởi trình trợ giúp</p>
+	</footer>
+</body>
+</html>
