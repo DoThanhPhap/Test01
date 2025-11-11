@@ -24,6 +24,9 @@
 			<p id="status">Nhấn nút bên dưới để hiển thị thời gian hiện tại.</p>
 			<button id="showTimeBtn">Hiển thị thời gian</button>
 			<p id="message" aria-live="polite"></p>
+			<!-- New greeting button -->
+			<button id="greetBtn" style="margin-left:0.5rem">Hiển thị lời chào</button>
+			<p id="greetMessage" aria-live="polite" style="margin-top:0.5rem;color:#004488;font-weight:600"></p>
 		</section>
 	</main>
 
@@ -31,6 +34,17 @@
 		document.getElementById('showTimeBtn').addEventListener('click', function () {
 			const now = new Date();
 			document.getElementById('message').textContent = 'Bây giờ là: ' + now.toLocaleString();
+		});
+
+		document.getElementById('greetBtn').addEventListener('click', function () {
+			const greetings = [
+				'Xin chào!',
+				'Chào bạn!',
+				'Chúc một ngày tốt lành!',
+				'Rất vui được gặp bạn!'
+			];
+			const msg = greetings[Math.floor(Math.random() * greetings.length)];
+			document.getElementById('greetMessage').textContent = msg;
 		});
 	</script>
 
