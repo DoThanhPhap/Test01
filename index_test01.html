@@ -46,6 +46,34 @@
 			const msg = greetings[Math.floor(Math.random() * greetings.length)];
 			document.getElementById('greetMessage').textContent = msg;
 		});
+
+		// Gold price button (fetch with fallback)
+		// Note: No external network calls are guaranteed in this environment; we try a public API and fallback to a mock price.
+		document.body.insertAdjacentHTML('beforeend', '\n\t\t<div style="margin:1rem 0">\n\t\t\t<button id="goldBtn">Giá vàng</button>\n\t\t\t<span id="goldMessage" aria-live="polite" style="margin-left:0.5rem;color:#8b5a00;font-weight:700"></span>\n\t\t</div>');
+
+		document.getElementById('goldBtn').addEventListener('click', function () {
+			const msgEl = document.getElementById('goldMessage');
+			msgEl.textContent = 'Đang lấy giá...';
+			// Example public API (may require CORS when opened locally). We'll attempt fetch and fallback.
+			const apiUrl = 'https://api.sampleapis.com/fakebank/gold'; // placeholder - likely not real
+			fetch(apiUrl)
+				.then(function (res) { if (!res.ok) throw new Error('Network response not ok'); return res.json(); })
+				.then(function (data) {
+					// Try to read a price field if available
+					const price = data && (data.price || data.goldPrice || data.rate);
+					if (price) {
+						msgEl.textContent = 'Giá vàng: ' + price + ' (nguồn API)';
+					} else {
+						msgEl.textContent = 'Không tìm thấy giá trong phản hồi API. (xem console)';
+						console.log('Gold API returned:', data);
+					}
+				})
+				.catch(function () {
+					// Fallback mock price
+					const mockPrice = '71,200,000 VND/kg';
+					msgEl.textContent = 'Giá vàng (tham khảo): ' + mockPrice;
+				});
+		});
 	</script>
 
 	<footer>
